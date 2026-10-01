@@ -1,0 +1,32 @@
+# ==============================================================================
+# NETLIFY CLOUD EDGE DEPLOYMENT MANIFEST & HEADER ENGINE
+# Automated compression and asset delivery routing guidelines.
+# ==============================================================================
+
+[build]
+  publish = "."
+
+# Global Security & Caching Protocols for High-Performance Delivery
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "upgrade-insecure-requests"
+
+# High-Efficiency Optimization for Dynamic Image Assets (.jpg, .png, .webp)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

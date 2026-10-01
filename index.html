@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveSelect | Premium Car Dealership</title>
+    <!-- Connects the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <div class="logo">DRIVE<span>SELECT</span></div>
+            <!-- Inject this localized currency switch node inside the header navigation structure of index.html -->
+            <ul class="nav-links" style="display: flex; align-items: center; list-style: none;">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#inventory">Inventory</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <!-- NEW INTERACTIVE PUBLIC CURRENCY TOGGLE CONSOLE -->
+                <li style="margin-left: 20px;">
+                    <select id="publicCurrencySwitch"
+                        style="background: #2b2b2b; color: white; border: 1px solid #ff3e3e; padding: 5px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; outline: none;">
+                        <option value="NGN" selected>₦ NGN (Naira)</option>
+                        <option value="USD">$ USD (Dollar)</option>
+                    </select>
+                </li>
+            </ul>
+
+
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <h1>Find Your Dream Car Today</h1>
+                <p>Explore the finest selection of certified pre-owned and brand-new luxury vehicles tailored to your
+                    lifestyle.
+                </p>
+                <a href="#inventory" class="btn">Browse Inventory</a>
+            </section>
+
+            <!-- Featured Inventory Section with Filter Controls -->
+            class="section">
+            <h2 class="section-title">Featured Vehicles</h2>
+
+            <!-- Updated Dynamic Inventory Section -->
+            <section id="inventory" class="section">
+                <h2 class="section-title">Featured Vehicles</h2>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="sedan">Sedans</button>
+                    <button class="filter-btn" data-filter="suv">SUVs</button>
+                    <button class="filter-btn" data-filter="sports">Sports</button>
+                    <button class="filter-btn" data-filter="electric">Electric</button>
+                </div>
+
+                <!-- The javascript target template grid -->
+                <div class="car-grid" id="dynamicCarGrid"></div>
+            </section>
+
+            <!-- NEW: Loan Calculator UI Section -->
+            <section id="finance-calculator-section" class="section"
+                style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 class="section-title">Calculate Financing</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div>
+                        <label>Vehicle Price ($)</label>
+                        <input type="number" id="calcVehiclePrice" class="calc-input" value="45000"
+                            style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ddd; border-radius:4px;">
+
+                        <label>Down Payment ($)</label>
+                        <input type="number" id="calcDownPayment" class="calc-input" value="5000"
+                            style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ddd; border-radius:4px;">
+                    </div>
+                    <div>
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="calcInterest" class="calc-input" value="4.5" step="0.1"
+                            style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ddd; border-radius:4px;">
+
+                        <label>Loan Term</label>
+                        <select id="calcTerm" class="calc-input"
+                            style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ddd; border-radius:4px;">
+                            <option value="36">36 Months (3 Years)</option>
+                            <option value="48">48 Months (4 Years)</option>
+                            <option value="60" selected>60 Months (5 Years)</option>
+                            <option value="72">72 Months (6 Years)</option>
+                        </select>
+                    </div>
+                    <div
+                        style="background: #1a1a1a; color: white; padding: 30px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                        <h3>Estimated Payment</h3>
+                        <div id="monthlyPaymentResult"
+                            style="font-size: 36px; font-weight: bold; color: #ff3e3e; margin: 15px 0;">$745.20</div>
+                        <p style="font-size: 12px; color: #aaa;">Per Month (Excludes taxes & licensing fees)</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Test Drive Reservation Booking Module Markup -->
+            <section id="book-test-drive" class="section"
+                style="background:#fff; padding:40px; border-radius:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 class="section-title">Schedule A Test Drive</h2>
+                <form id="testDriveForm" style="max-width:600px; margin:0 auto;">
+                    <label>Select Car Variant</label>
+                    <select id="bookingVehicle"
+                        style="width:100%; padding:12px; margin:8px 0 20px; border:1px solid #ddd; border-radius:5px;"
+                        required>
+                        <option value="Grand Touring Sedan">Grand Touring Sedan ($45,000)</option>
+                        <option value="Adventure Terrain SUV">Adventure Terrain SUV ($58,500)</option>
+                        <option value="Apex Evolution Sport">Apex Evolution Sport ($89,000)</option>
+                    </select>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                        <div>
+                            <label>Preferred Date</label>
+                            <input type="date" id="bookingDate"
+                                style="width:100%; padding:12px; margin:8px 0 20px; border:1px solid #ddd; border-radius:5px;"
+                                required>
+                        </div>
+                        <div>
+                            <label>Preferred Time Slot</label>
+                            <select id="bookingTime"
+                                style="width:100%; padding:12px; margin:8px 0 20px; border:1px solid #ddd; border-radius:5px;"
+                                required>
+                                <option value="Morning (9AM - 12PM)">Morning (9AM - 12PM)</option>
+                                <option value="Afternoon (12PM - 3PM)">Afternoon (12PM - 3PM)</option>
+                                <option value="Evening (3PM - 6PM)">Evening (3PM - 6PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;">Book Fleet Appointment</button>
+                </form>
+            </section>
+
+
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Visit Our Showroom</h3>
+                        <p>Have questions about a specific model or want to schedule a test drive? Drop us a message or
+                            visit
+                            our local dealership headquarters.</p>
+                        <br>
+                        <p><strong>Address:</strong> 100 DriveSelect Way, Automotive District</p>
+                        <p><strong>Phone:</strong> +1 (555) 019-2834</p>
+                        <p><strong>Hours:</strong> Mon - Sat: 9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="contact-form">
+                        <form id="carContactForm">
+                            <input type="text" id="clientName" placeholder="Your Name" required>
+                            <input type="email" id="clientEmail" placeholder="Your Email Address" required>
+                            <textarea id="clientMessage" placeholder="Which car are you interested in?" rows="5"
+                                required></textarea>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- REAL-TIME CUSTOMER TESTIMONIALS & RATING APP MODULE -->
+            <section id="reviews" class="section"
+                style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 class="section-title">Client Testimonials</h2>
+
+                <!-- Interactive Analytics Summary Row -->
+                <div
+                    style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; text-align: center; margin-bottom: 40px; background: #f8f9fa; padding: 20px; border-radius: 6px;">
+                    <div>
+                        <div id="summaryAvgRating" style="font-size: 48px; font-weight: 800; color: #ff9800;">4.8</div>
+                        <div id="summaryStarRow" style="color: #ff9800; font-size: 18px; margin: 3px 0;">⭐⭐⭐⭐⭐</div>
+                        <p style="font-size: 13px; color: #777; margin: 0;">Showroom Satisfaction Metric</p>
+                    </div>
+                    <div style="border-left: 1px solid #ddd; height: 60px; display: none; display: inline-block;"></div>
+                    <div>
+                        <div id="summaryTotalReviews" style="font-size: 36px; font-weight: 700; color: #1a1a1a;">2 Units
+                        </div>
+                        <p style="font-size: 13px; color: #777; margin: 0;">Verified Client Submissions</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+                    <!-- Left Panel: Submission Box Interface -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 18px;">Share Your DriveSelect Experience</h3>
+                        <form id="showroomReviewForm">
+                            <input type="text" id="reviewerName" placeholder="Your Name or Company"
+                                style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; outline: none;"
+                                required>
+
+                            <!-- Star Rating Interactive Selector -->
+                            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 14px; font-weight: 600; color: #555;">Assign Score:</span>
+                                <div id="starInputRating"
+                                    style="display: flex; gap: 5px; font-size: 24px; cursor: pointer; color: #ccc;">
+                                    <span data-score="1" class="star-node">★</span>
+                                    <span data-score="2" class="star-node">★</span>
+                                    <span data-score="3" class="star-node">★</span>
+                                    <span data-score="4" class="star-node">★</span>
+                                    <span data-score="5" class="star-node">★</span>
+                                </div>
+                            </div>
+
+                            <textarea id="reviewerText"
+                                placeholder="Write your delivery review or verification details here..." rows="4"
+                                style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; outline: none; font-family: inherit;"
+                                required></textarea>
+                            <button type="submit" class="btn" style="width: 100%;">Post Live Testimonial</button>
+                        </form>
+                    </div>
+
+                    <!-- Right Panel: Live Feed Output Scroll Window -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 18px;">Recent Active Verifications</h3>
+                        <div id="liveReviewsContainer"
+                            style="display: flex; flex-direction: column; gap: 20px; max-height: 380px; overflow-y: auto; padding-right: 5px;">
+                            <!-- Javascript will automatically stream data packages here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Footer Section -->
+            <footer>
+                <p>&copy; 2026 DriveSelect Automotive. All rights reserved.</p>
+            </footer>
+
+            <!-- Connects the external Javascript file -->
+            <script src="script.js"></script>
+            <script src="inventory.js"></script>
+            <script src="loan-calculator.js"></script>
+            <script src="script.js"></script>
+            <script src="utils.js"></script>
+            <script src="inventory.js"></script>
+            <script src="loan-calculator.js"></script>
+            <script src="scheduler.js"></script>
+            <script src="theme-toggle.js"></script>
+            <script src="script.js"></script>
+            <!-- Injection of Cloud Server Network Deliverables -->
+            <script type="text/javascript" src="https://jsdelivr.net"></script>
+            <script src="email-config.js"></script>
+
+            <!-- Original Local Files Stack -->
+            <script src="utils.js"></script>
+            <script src="inventory.js"></script>
+            <script src="loan-calculator.js"></script>
+            <script src="scheduler.js"></script>
+            <script src="theme-toggle.js"></script>
+            <script src="script.js"></script>
+            <!-- Add the reviews engine right into your scripts stack inside index.html -->
+            <script src="reviews.js"></script>
+            <script src="theme-toggle.js"></script>
+            <script src="script.js"></script>
+</body>
+
+</html>
+
+
+</body>
+
+</html>

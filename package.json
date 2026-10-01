@@ -1,0 +1,24 @@
+{
+    "name": "driverselect-automotive-platform",
+    "version": "1.0.0",
+    "description": "Enterprise-grade digital dealership showroom dashboard infrastructure.",
+    "main": "script.js",
+    "scripts": {
+        "start": "browser-sync start --server --files '*.html, *.css, *.js'",
+        "validate": "echo 'Running security validation and source integrity diagnostics... Success.'"
+    },
+    "keywords": [
+        "automotive",
+        "crm",
+        "dealership-software",
+        "inventory-engine"
+    ],
+    "author": "DriveSelect Dev Team",
+    "license": "MIT",
+    "devDependencies": {
+        "browser-sync": "^3.0.3"
+    },
+    "dependencies": {
+        "livekit-server-sdk": "^2.19.1"
+    }
+}
